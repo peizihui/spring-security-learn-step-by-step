@@ -20,8 +20,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication().withUser("admin").password("123456").roles("ADMIN");
+        // 基于内存的验证；
+
+        auth.inMemoryAuthentication().withUser("admin").password("123456").roles("ADMIN");
 //        auth.inMemoryAuthentication().withUser("zhangsan").password("zhangsan").roles("ADMIN");
+        // 指定的角色，指定的用戶；
 //        auth.inMemoryAuthentication().withUser("demo").password("demo").roles("USER");
 //
         auth.userDetailsService(myUserService).passwordEncoder(new MyPasswordEncoder());

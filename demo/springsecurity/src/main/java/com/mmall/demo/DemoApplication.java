@@ -27,8 +27,9 @@ import java.util.List;
  */
 @SpringBootApplication
 @RestController
-@EnableAutoConfiguration
+@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
 @EnableGlobalMethodSecurity(prePostEnabled = true)
+// 该注解配置后下文@PreAuthorize("hasRole('ROLE_ADMIN')")才有效；
 public class DemoApplication {
 
 	public static void main(String[] args) {
@@ -44,16 +45,18 @@ public class DemoApplication {
 	public String hello() {
 		return "hello world";
 	}
-
+	// 注意必須有ROLE_開始，參考RoleVoter;
+	// @EnableGlobalMethodSecurity(prePostEnabled = true) 设置，该@PreAuthorize 才有效；
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping("/roleAuth")
 	public String role() {
 		return "admin auth";
 	}
 
-
+	// 对参数进行过滤；
 	@PreAuthorize("#id<10 and principal.username.equals(#username) and #user.username.equals('abc')")
 	@PostAuthorize("returnObject%2==0")
+	// PostAuthorize 对返回值进行过滤；
 	@RequestMapping("/test")
 	public Integer test(Integer id, String username, User user) {
 		// ...
