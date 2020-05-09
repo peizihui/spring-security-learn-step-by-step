@@ -250,7 +250,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 
-## 5.2  
+## 5.2    EnableGlobalMethodSecurity
 
 ```java
 @EnableAutoConfiguration
@@ -264,7 +264,7 @@ public class DemoApplication {
 
 
 
-## 5.3
+## 5.3 Controller
 
 
 
